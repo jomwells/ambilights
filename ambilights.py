@@ -1,4 +1,4 @@
-### Home Assistant Component to integrate Phillip TVs' Ambilights as a Light Component using the JointSpace API ###
+### Home Assistant Platform to integrate Phillip TVs' Ambilights as a Light Component using the JointSpace API ###
 
 
 import json
@@ -17,13 +17,13 @@ DEFAULT_HOST = '127.0.0.1'
 DEFAULT_USER = 'user'
 DEFAULT_PASS = 'pass'
 DEFAULT_NAME = 'TV Ambilights'
-BASE_URL = 'https://{0}:1926/6/{1}' # for older philips tv's, try changing this to 'http://{0}:1925/1/{1}'
+BASE_URL = 'https://{0}:1926/6/{1}' # for older philps tv's, try changing this to 'http://{0}:1925/1/{1}'
 DEFAULT_HUE = 360
 DEFAULT_SATURATION = 0
 DEFAULT_BRIGHTNESS = 255
 TIMEOUT = 5.0
 CONNFAILCOUNT = 5
-OLD_STATE = [DEFAULT_HUE, DEFAULT_SATURATION, DEFAULT_BRIGHTNESS]
+
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 	vol.Required(CONF_HOST, default=DEFAULT_HOST): cv.string,
@@ -48,6 +48,7 @@ EFFECT_SPECTRUM = "Spectrum"
 EFFECT_SCANNER = "Scanner"
 EFFECT_RHYTHM = "Rhythm"
 EFFECT_RANDOM = "Party"
+DEFAULT_EFFECT = EFFECT_MANUAL
 
 # this is the list of effects, you can safely remove any effects from the list below to remove them from the front-end
 AMBILIGHT_EFFECT_LIST = [EFFECT_MANUAL, EFFECT_STANDARD, EFFECT_NATURAL, EFFECT_IMMERSIVE, EFFECT_VIVID, 
@@ -60,6 +61,8 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
 	user = config.get(CONF_USERNAME)
 	password = config.get(CONF_PASSWORD)
 	add_devices([Ambilight(name, host, user, password)])
+
+OLD_STATE = [DEFAULT_HUE, DEFAULT_SATURATION, DEFAULT_BRIGHTNESS, DEFAULT_EFFECT]
 
 class Ambilight(Light):
 
@@ -75,6 +78,7 @@ class Ambilight(Light):
         self._effect = None
         self._session = requests.Session()
         self._session.mount('https://', HTTPAdapter(pool_connections=1))
+
 
     @property
     def name(self):
@@ -128,13 +132,17 @@ class Ambilight(Light):
             self.set_effect(effect)
 
         else:
-            self._postReq('ambilight/currentconfiguration',{"styleName":"FOLLOW_COLOR","isExpert":True,"algorithm":"MANUAL_HUE",
-            "colorSettings":{"color":{"hue":int(OLD_STATE[0]*(255/360)),"saturation":int(OLD_STATE[1]*(255/100)),
-            "brightness":OLD_STATE[2]},"colorDelta":{"hue":0,"saturation":0,"brightness":0},"speed":255}} )
+            if OLD_STATE[3] == EFFECT_MANUAL:
+                self._postReq('ambilight/currentconfiguration',{"styleName":"FOLLOW_COLOR","isExpert":True,"algorithm":"MANUAL_HUE",
+                "colorSettings":{"color":{"hue":int(OLD_STATE[0]*(255/360)),"saturation":int(OLD_STATE[1]*(255/100)),
+                "brightness":OLD_STATE[2]},"colorDelta":{"hue":0,"saturation":0,"brightness":0},"speed":255}} )
+            else: 
+                effect = self._effect
+                self.set_effect(effect)
 
     def turn_off(self, **kwargs):
         global OLD_STATE
-        OLD_STATE = [self._hs[0], self._hs[1], self._brightness]
+        OLD_STATE = [self._hs[0], self._hs[1], self._brightness, self._effect]
         self._postReq('ambilight/power', {'power':'Off'})
         self._state = False
 		
