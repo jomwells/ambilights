@@ -77,10 +77,6 @@ class Ambilight(Light):
         self._session.mount('https://', HTTPAdapter(pool_connections=1))
 
     @property
-    def available(self) -> bool:
-        return self._available	
-
-    @property
     def name(self):
         return self._name
 
