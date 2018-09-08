@@ -75,6 +75,7 @@ class Ambilight(Light):
         self._connfail = 0
         self._brightness = None
         self._hs = None
+        self._available = False
         self._effect = None
         self._session = requests.Session()
         self._session.mount('https://', HTTPAdapter(pool_connections=1))
@@ -87,6 +88,10 @@ class Ambilight(Light):
     @property
     def is_on(self):
         return self._state
+
+    @property
+    def available(self):
+        return self._available
 
     @property
     def supported_features(self):
@@ -149,9 +154,9 @@ class Ambilight(Light):
     def getState(self):
         fullstate = self._getReq('ambilight/currentconfiguration')
         if fullstate:
+            self._available = True
             styleName = fullstate['styleName']
             if styleName:
-                self._available = True
                 if styleName == 'FOLLOW_COLOR':
                     isExpert = fullstate['isExpert']
                     if isExpert == True:
@@ -208,9 +213,9 @@ class Ambilight(Light):
                     elif effect == "MODE_RANDOM":
                         self._effect = EFFECT_RANDOM
 
-            else:
-                self._available = False
-                self._state = False
+        else:
+            self._available = False
+            self._state = False
 
     def update(self):
         self.getState()
