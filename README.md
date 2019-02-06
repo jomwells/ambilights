@@ -3,6 +3,8 @@
 
 This custom component utilizes the [JointSpace API](http://jointspace.sourceforge.net/projectdata/documentation/jasonApi/1/doc/API.html) to control the Ambilights on a 2016+ Philips Android TV from within Home Assistant
 
+### For more help with this component, see the [discussion](https://community.home-assistant.io/t/philips-android-tv-ambilights-light-component/67754) on community.home-assistant.io
+
 ## Installation
 First Pair your TV, and generate the username and password using [this tool](https://github.com/suborb/philips_android_tv) and enter the details, along with the IP address of your TV into your configuration.yaml as follows:
 ```
