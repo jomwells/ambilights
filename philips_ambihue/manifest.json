@@ -1,6 +1,6 @@
 {
   "domain": "philips_ambihue",
-  "name": "Philips HUE+Ambilight",
+  "name": "Philips Ambilight+hue",
   "documentation": "https://github.com/jomwells/ambilights",
   "dependencies": [],
   "codeowners": [],
