@@ -1,5 +1,5 @@
 # Philips Ambilight Light Component for Home Assistant
-### and Ambilight+Hue Switch Component (see below)
+### and Ambilight+hue Switch Component (see below)
 
 This custom component utilizes the [JointSpace API](http://jointspace.sourceforge.net/projectdata/documentation/jasonApi/1/doc/API.html) to control the Ambilight on a 2016+ Philips Android TV from within Home Assistant
 
@@ -48,15 +48,15 @@ Individual effects can be easily removed from the Front-End by removing them fro
 ## Older Philips TV's
 Older (non-Android) Philips TV's with ambilight, which use the JointSpace API, may be controllable through this component, try changing the `BASE_URL` on line 20 to `http://{0}:1925/1/{1}`. Note: as the older API does not use HTTPS, there is no need for the `username` and  `password` fields to be generated or placed into your `configuration.yaml`, there may also be changes needed to the `_getReq()` and `_postReq()` sections to accomodate this, If anyone is successful with this, let me know and I will update this section.
 
-# Ambilight+Hue Switch Component
-For automating the control of the Ambilight+Hue setting, use the additional Ambihue (Switch) component, this enables the status of the setting to be determined by Home Assistant, and allows for remote or automated toggling.
+# Ambilight+hue Switch Component
+For automating the control of the Ambilight+hue setting, use the additional Ambihue (Switch) component, this enables the status of the setting to be determined by Home Assistant, and allows for remote or automated toggling.
 ## Installation
 If you have already setup the Ambilight component, the install of the switch component is very simple, place the 'switch.py' in your 'config/custom_components/philips_ambihue/' directory,
 enter the same details as for the abilight component in the configuration.yaml as follows:
 ```
 switch:
   - platform: philips_ambihue
-    name: Ambilight+Hue
+    name: Ambilight+hue
     host: 192.168.1.XXX
     username: !secret philips_username
     password: !secret philips_password
