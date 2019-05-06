@@ -1,4 +1,4 @@
-### Home Assistant Platform to integrate Phillip TVs' Ambilights as a Light Component using the JointSpace API ###
+### Home Assistant Platform to integrate Phillip TVs' Ambilight as a Light Component using the JointSpace API ###
 
 
 import json
@@ -16,7 +16,7 @@ DEFAULT_DEVICE = 'default'
 DEFAULT_HOST = '127.0.0.1'
 DEFAULT_USER = 'user'
 DEFAULT_PASS = 'pass'
-DEFAULT_NAME = 'TV Ambilights'
+DEFAULT_NAME = 'TV Ambilight'
 BASE_URL = 'https://{0}:1926/6/{1}' # for older philps tv's, try changing this to 'http://{0}:1925/1/{1}'
 DEFAULT_HUE = 360
 DEFAULT_SATURATION = 0
