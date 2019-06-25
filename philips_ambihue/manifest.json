@@ -1,8 +1,0 @@
-{
-  "domain": "philips_ambihue",
-  "name": "Philips Ambilight+hue",
-  "documentation": "https://github.com/jomwells/ambilights",
-  "dependencies": [],
-  "codeowners": [],
-  "requirements": []
-}
