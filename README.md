@@ -78,7 +78,7 @@ switch:
 
 # Phillips TV Ambilight+Yeelight (Switch) Component ```Work in Progress```
 
-<image></image>
+![Ambilight+Yeelight](images/ambilight+yeelight.jpg)
 
 >### Epilepsy Warning:
 >At times when testing this component (usually when the TV is displaying an ambient light / no colour), the bulb is still updated rapidly and can cause a noticeable flicker - if you have **Epilepsy** this may not be for you. (Yet)
@@ -104,7 +104,7 @@ switch:
 
 The per-bulb positions I have added (defined by ```display_options```) are as follows:
 
-<image></image>
+![Ambilight+Yeelight Positions](images/ambilight+yeelight_positions.jpg)
 
 > Note: I have not tested each and every one of these positions manually, if one of them doesn't seem right, assume it's my fault and let me know :)
 
