@@ -117,5 +117,6 @@ For a more custom position, different value calculations, or perhaps something d
 
 This component works by combining (or using features from) the following resources with a custom python script, if you would like to understand or improve different parts of this component, this is a good place to start:
 - [Python-Yeelight Library](https://yeelight.readthedocs.io/en/latest/) (Included in Home Assistant) by [Stavros](https://gitlab.com/stavros)
-- [Pylips](https://github.com/eslavnov/pylips) - Phillips TV / Jointspace library (not Included) by [eslavnov](https://github.com/eslavnov)
-- The [Phillips JointSpace API  Documentation](http://jointspace.sourceforge.net/projectdata/documentation/jasonApi/1/doc/API.html)
+- [Pylips](https://github.com/eslavnov/pylips) - Phillips TV / Jointspace library (not Included) by [eslavnov](https://github.com/eslavnov) (very useful for testing)
+- The Phillips [JointSpace API  Documentation](http://jointspace.sourceforge.net/projectdata/documentation/jasonApi/1/doc/API.html)
+- [Philps Jointspace v6 Commands](https://gist.github.com/marcelrv/ee9a7cf97c227d069e4ee88d26691019) by [marcelrv](https://gist.github.com/marcelrv)
