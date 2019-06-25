@@ -76,7 +76,8 @@ switch:
 ```
 *note* there is often a noticeable lag between Home Assistant sending the request to toggle the setting, and receiving a status update from the API, for this reason, it is advised that you reduce your `scan_interval` (in seconds) to suit your needs.
 
-# Phillips TV Ambilight+Yeelight (Switch) Component ```Work in Progress```
+# Phillips TV Ambilight+Yeelight (Switch) Component 
+## ``` Work in Progress```
 
 ![Ambilight+Yeelight](images/ambilight+yeelight.jpg)
 
