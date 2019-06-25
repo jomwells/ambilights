@@ -107,7 +107,9 @@ The per-bulb positions I have added (defined by ```display_options```) are as fo
 
 ![Ambilight+Yeelight Positions](images/ambilight+yeelight_positions.jpg)
 
-> Note: I have not tested each and every one of these positions manually, if one of them doesn't seem right, assume it's my fault and let me know :)
+> Note: 
+> - I have not tested each and every one of these positions manually, if one of them doesn't seem right, assume it's my fault and let me know :)
+> - As I do not have a TV with bottom ambilight LED's, I have not been able to test this part at all, although it should work in theory, please let me know if you have any success.
 
 For a more custom position, different value calculations, or perhaps something different entirely, see the links in the code's comments. Understanding the 'topology' section [(JointSpace API)](http://jointspace.sourceforge.net/projectdata/documentation/jasonApi/1/doc/API.html) will go a long way to explaining how this part works.
 
