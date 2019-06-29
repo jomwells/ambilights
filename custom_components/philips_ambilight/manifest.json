@@ -3,6 +3,6 @@
   "name": "Philips Ambilights",
   "documentation": "https://github.com/jomwells/ambilights",
   "dependencies": [],
-  "codeowners": ["@jomwells"],
+  "codeowners": ["@jomwells","@hutchinsane"],
   "requirements": []
 }
