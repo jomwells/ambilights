@@ -122,8 +122,12 @@ class Ambilight(Light):
             self._hs = kwargs[ATTR_HS_COLOR]
             convertedHue = int(self._hs[0]*(255/360))
             convertedSaturation = int(self._hs[1]*(255/100))
+            if ATTR_BRIGHTNESS in kwargs:
+                convertedBrightness = kwargs[ATTR_BRIGHTNESS]
+            else:
+                convertedBrightness = self._brightness
             self._postReq('ambilight/currentconfiguration',{"styleName":"FOLLOW_COLOR","isExpert":True,"algorithm":"MANUAL_HUE",
-            "colorSettings":{"color":{"hue":convertedHue,"saturation":convertedSaturation,"brightness":self._brightness},
+            "colorSettings":{"color":{"hue":convertedHue,"saturation":convertedSaturation,"brightness":convertedBrightness},
             "colorDelta":{"hue":0,"saturation":0,"brightness":0},"speed":255}} )
 
         elif ATTR_BRIGHTNESS in kwargs:
