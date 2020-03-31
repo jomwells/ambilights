@@ -6,8 +6,8 @@ import string
 import requests
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
-from homeassistant.components.light import (ATTR_BRIGHTNESS, Light, PLATFORM_SCHEMA, ATTR_HS_COLOR,
-                                            SUPPORT_BRIGHTNESS, SUPPORT_COLOR, ATTR_EFFECT, SUPPORT_EFFECT)
+from homeassistant.components.light import (ATTR_BRIGHTNESS, Light, PLATFORM_SCHEMA, ATTR_HS_COLOR, ATTR_TRANSITION,
+                                            SUPPORT_BRIGHTNESS, SUPPORT_COLOR, SUPPORT_TRANSITION, ATTR_EFFECT, SUPPORT_EFFECT)
 from homeassistant.const import (CONF_HOST, CONF_NAME, CONF_USERNAME, CONF_PASSWORD)
 from requests.auth import HTTPDigestAuth
 from requests.adapters import HTTPAdapter
@@ -118,7 +118,28 @@ class Ambilight(Light):
         return True
 
     def turn_on(self, **kwargs):
-        if ATTR_HS_COLOR in kwargs:
+        if ATTR_TRANSITION in kwargs:
+            # Here we save current color and brightness
+            convertedHue_old = int(self._hs[0]*(255/360))
+            convertedBrightness_old = self._brightness
+            if ATTR_BRIGHTNESS in kwargs:
+                convertedBrightness = kwargs[ATTR_BRIGHTNESS]
+            else:
+                convertedBrightness = self._brightness
+            self._hs = kwargs[ATTR_HS_COLOR] if (ATTR_HS_COLOR in kwargs) else self._hs
+            convertedHue = int(self._hs[0]*(255/360))
+            convertedSaturation = int(self._hs[1]*(255/100))
+            hue_addorsubst = 1 if (convertedHue_old < convertedHue) else -1
+            bright_addorsubst = 1 if (convertedBrightness_old < convertedBrightness) else -1
+            # Now we start transition from old color/brightness to new color and brightness. Loop until match.
+            while convertedHue_old != convertedHue or convertedBrightness_old != convertedBrightness:
+                convertedHue_old = (convertedHue_old + hue_addorsubst) if convertedHue_old != convertedHue else convertedHue
+                convertedBrightness_old = (convertedBrightness_old + bright_addorsubst) if convertedBrightness_old != convertedBrightness else convertedBrightness
+                self._postReq('ambilight/currentconfiguration',{"styleName":"FOLLOW_COLOR","isExpert":True,"algorithm":"MANUAL_HUE",
+                "colorSettings":{"color":{"hue":convertedHue_old,"saturation":convertedSaturation,"brightness":convertedBrightness_old},
+                "colorDelta":{"hue":0,"saturation":0,"brightness":0},"speed":255}} )
+            self.getState()
+        elif ATTR_HS_COLOR in kwargs:
             self._hs = kwargs[ATTR_HS_COLOR]
             convertedHue = int(self._hs[0]*(255/360))
             convertedSaturation = int(self._hs[1]*(255/100))
@@ -145,7 +166,7 @@ class Ambilight(Light):
         elif ATTR_EFFECT in kwargs:
             effect = kwargs[ATTR_EFFECT]
             self.set_effect(effect)
-
+        
         else:
             if OLD_STATE[3] == EFFECT_MANUAL:
                 self._postReq('ambilight/currentconfiguration',{"styleName":"FOLLOW_COLOR","isExpert":True,"algorithm":"MANUAL_HUE",
