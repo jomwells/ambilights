@@ -166,7 +166,7 @@ class Ambilight(Light):
         elif ATTR_EFFECT in kwargs:
             effect = kwargs[ATTR_EFFECT]
             self.set_effect(effect)
-        
+
         else:
             if OLD_STATE[3] == EFFECT_MANUAL:
                 self._postReq('ambilight/currentconfiguration',{"styleName":"FOLLOW_COLOR","isExpert":True,"algorithm":"MANUAL_HUE",
