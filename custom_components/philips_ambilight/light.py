@@ -1,4 +1,4 @@
-### Home Assistant Platform to integrate Phillip TVs' Ambilight as a Light Component using the JointSpace API ###
+### Home Assistant Platform to integrate Phillip TVs' Ambilight as a light entity using the JointSpace API ###
 
 
 import json
@@ -6,7 +6,8 @@ import string
 import requests
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
-from homeassistant.components.light import (ATTR_BRIGHTNESS, Light, PLATFORM_SCHEMA, ATTR_HS_COLOR, ATTR_TRANSITION,
+
+from homeassistant.components.light import (ATTR_BRIGHTNESS, LightEntity, PLATFORM_SCHEMA, ATTR_HS_COLOR, ATTR_TRANSITION,
                                             SUPPORT_BRIGHTNESS, SUPPORT_COLOR, SUPPORT_TRANSITION, ATTR_EFFECT, SUPPORT_EFFECT)
 from homeassistant.const import (CONF_HOST, CONF_NAME, CONF_USERNAME, CONF_PASSWORD)
 from requests.auth import HTTPDigestAuth
@@ -64,7 +65,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
 
 OLD_STATE = [DEFAULT_HUE, DEFAULT_SATURATION, DEFAULT_BRIGHTNESS, DEFAULT_EFFECT]
 
-class Ambilight(Light):
+class Ambilight(LightEntity):
 
     def __init__(self, name, host, user, password):
         self._name = name
