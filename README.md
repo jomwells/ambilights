@@ -45,6 +45,8 @@ This component has the following features:
 - Power Ambilight ON/OFF
 - Brightness
 - RGB colour
+- Transition
+  - Support for smooth transition between color and brightness.
 - Effects
   - Manual (custom RGB color for all LED's)
   - Standard (Follow Video)
