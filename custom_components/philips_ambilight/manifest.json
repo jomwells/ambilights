@@ -4,5 +4,6 @@
   "documentation": "https://github.com/jomwells/ambilights",
   "dependencies": [],
   "codeowners": ["@jomwells","@hutchinsane"],
-  "requirements": []
+  "requirements": [],
+  "version": "1.0.0"
 }
