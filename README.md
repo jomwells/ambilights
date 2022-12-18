@@ -24,7 +24,7 @@ If you have not already done so for another component, first Pair with your TV t
 #### Option 1: (recommended)
 This repository is compatible with the Home Assistant Community Store ([HACS](https://community.home-assistant.io/t/custom-component-hacs/121727)).
 
-After installing HACS, install 'Philips Ambilights' from the store, and use the ```configuration.yaml``` example below.
+After installing HACS, install 'Ambilights' from the store, and use the ```configuration.yaml``` example below.
 
 #### Option 2: (manual)
 Download this repository as a zip file, and place the ```philips_ambilight``` directory in your ```config/custom_components/``` directory.
